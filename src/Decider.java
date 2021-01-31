@@ -1,7 +1,25 @@
-public class Decide {
+public class Decider {
+
+    // input variables, should be arguments in constructor
+    int numpoints; // 2 < numpoints < 100
+    int[][] distances;
+    int[][] LCM; // 0 = ANDD, 1 = ORR, 2 = NOTUSED
+    boolean[] PUV;
+    //PARAMETERS[20] parameters;
+
+    // variables we create
+    boolean[][] PUM;
+    boolean[] FUV;
+    boolean[] CMV;
 
     Decide() {
-        boolean[] CMV = new boolean[15];
+        this.numpoints = numpoints;
+        this.distances = distances;
+        this.LCM = LCM;
+        this.PUV = PUV;
+        this.PUM = new boolean[15][15];
+        this.FUV = new boolean[15];
+        this.CMV = new boolean[15];
     }
 
     // licCond functions modify this.CMV to avoid passing parameters
@@ -35,17 +53,13 @@ public class Decide {
     }
     private void licCond14() {
     }
-
-    private static boolean[][] computePUM() {
-        return new boolean[15][15];
+    private void computePUM() {
     }
-
-    private static boolean[] computeFUV() {
-        return new boolean[15];
+    private void computeFUV() {
     }
 
     // calls all functions and returns the answer
-    public boolean runDecide() {
+    public boolean Decide() {
         return false;
     }
 
