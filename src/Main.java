@@ -1,6 +1,6 @@
-public class Main2 {
+public class Main {
     public static void main(String[] args) {
-        Decide decision = new Decide();
-        boolean res = decision.runDecide();
+        Decider decision = new Decider();
+        boolean res = decision.Decide();
     }
 }

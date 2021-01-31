@@ -12,7 +12,7 @@ public class Decider {
     boolean[] FUV;
     boolean[] CMV;
 
-    Decide() {
+    Decider() {
         this.numpoints = numpoints;
         this.distances = distances;
         this.LCM = LCM;
