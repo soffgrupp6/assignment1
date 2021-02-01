@@ -1,3 +1,5 @@
+package decider;
+
 public class Decider {
 
     // input variables, should be arguments in constructor
@@ -22,37 +24,25 @@ public class Decider {
         this.CMV = new boolean[15];
     }
 
-    // licCond functions modify this.CMV to avoid passing parameters
-    private void licCond0() {
+    private void computeConds() {
+        Conditions cond = new Conditions(points, parameters);
+        CMV[0] = cond.licCond0();
+        CMV[1] = cond.licCond1();
+        CMV[2] = cond.licCond2();
+        CMV[3] = cond.licCond3();
+        CMV[4] = cond.licCond4();
+        CMV[5] = cond.licCond5();
+        CMV[6] = cond.licCond6();
+        CMV[7] = cond.licCond7();
+        CMV[8] = cond.licCond8();
+        CMV[9] = cond.licCond9();
+        CMV[10] = cond.licCond10();
+        CMV[11] = cond.licCond11();
+        CMV[12] = cond.licCond12();
+        CMV[13] = cond.licCond13();
+        CMV[14] = cond.licCond14();
     }
-    private void licCond1() {
-    }
-    private void licCond2() {
-    }
-    private void licCond3() {
-    }
-    private void licCond4() {
-    }
-    private void licCond5() {
-    }
-    private void licCond6() {
-    }
-    private void licCond7() {
-    }
-    private void licCond8() {
-    }
-    private void licCond9() {
-    }
-    private void licCond10() {
-    }
-    private void licCond11() {
-    }
-    private void licCond12() {
-    }
-    private void licCond13() {
-    }
-    private void licCond14() {
-    }
+
     private void computePUM() {
     }
     private void computeFUV() {
