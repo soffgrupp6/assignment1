@@ -14,7 +14,7 @@ public class Decider {
 
     Decider() {
         this.numpoints = numpoints;
-        this.distances = distances;
+        this.points = points;
         this.LCM = LCM;
         this.PUV = PUV;
         this.PUM = new boolean[15][15];
