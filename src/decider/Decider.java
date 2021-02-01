@@ -1,5 +1,4 @@
 package decider;
-
 /**
  * Decider class computes on the input point data
  * using parameters to calculate if the missiles should
@@ -19,7 +18,7 @@ public class Decider {
     boolean[] FUV;
     boolean[] CMV;
 
-    Decider() {
+    public Decider() {
         this.numpoints = numpoints;
         this.points = points;
         this.LCM = LCM;
