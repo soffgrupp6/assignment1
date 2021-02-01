@@ -1,11 +1,33 @@
 public class Decider {
 
+    public class Parameters {
+        public double LENGTH1;
+        public double LENGTH2;
+        public double RADIUS1;
+        public double RADIUS2;
+        public double EPSILON;
+        public double AREA1;
+        public double AREA2;
+        public double DIST;
+        public int QUADS;
+        public int Q_PTS;
+        public int N_PTS;
+        public int K_PTS;
+        public int A_PTS;
+        public int B_PTS;
+        public int C_PTS;
+        public int D_PTS;
+        public int E_PTS;
+        public int F_PTS;
+        public int G_PTS;
+    }
+
     // input variables, should be arguments in constructor
     int numpoints; // 2 < numpoints < 100
     int[][] points;
     int[][] LCM; // 0 = ANDD, 1 = ORR, 2 = NOTUSED
     boolean[] PUV;
-    //PARAMETERS[20] parameters;
+    Parameters parameters;
 
     // variables we create
     boolean[][] PUM;
@@ -17,6 +39,7 @@ public class Decider {
         this.points = points;
         this.LCM = LCM;
         this.PUV = PUV;
+        this.parameters = parameters;
         this.PUM = new boolean[15][15];
         this.FUV = new boolean[15];
         this.CMV = new boolean[15];
