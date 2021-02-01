@@ -5,7 +5,7 @@ public class Decider {
     int[][] points;
     int[][] LCM; // 0 = ANDD, 1 = ORR, 2 = NOTUSED
     boolean[] PUV;
-    //PARAMETERS[20] parameters;
+    Parameters parameters;
 
     // variables we create
     boolean[][] PUM;
@@ -17,6 +17,7 @@ public class Decider {
         this.points = points;
         this.LCM = LCM;
         this.PUV = PUV;
+        this.parameters = parameters;
         this.PUM = new boolean[15][15];
         this.FUV = new boolean[15];
         this.CMV = new boolean[15];
