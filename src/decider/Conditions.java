@@ -20,6 +20,9 @@ public class Conditions {
 
         float xDis, yDis;
 
+        if(points.length < 2)
+            throw new IllegalArgumentException("Need to be at least two points");
+
         /**
          * Iterate each point and check the distance between two consecutive points
          */
