@@ -1,5 +1,10 @@
 package decider;
 
+/**
+ * Decider class computes on the input point data
+ * using parameters to calculate if the missiles should
+ * be launched or not.
+ */
 public class Decider {
 
     // input variables, should be arguments in constructor

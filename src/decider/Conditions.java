@@ -1,5 +1,9 @@
 package decider;
 
+/**
+ * Conditions calculate if the given points fulfill
+ * the specified conditions based on given parameters
+ */
 public class Conditions {
 
     int[][] points;
