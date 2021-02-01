@@ -9,7 +9,7 @@ public class Conditions {
     int[][] points;
     Parameters params;
 
-    Conditions(int[][] points, Parameters parameters) {
+    public Conditions(int[][] points, Parameters parameters) {
         this.points = points;
         this.params = parameters;
     }
