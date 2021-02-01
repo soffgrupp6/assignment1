@@ -2,7 +2,7 @@ public class Decider {
 
     // input variables, should be arguments in constructor
     int numpoints; // 2 < numpoints < 100
-    int[][] distances;
+    int[][] points;
     int[][] LCM; // 0 = ANDD, 1 = ORR, 2 = NOTUSED
     boolean[] PUV;
     //PARAMETERS[20] parameters;
