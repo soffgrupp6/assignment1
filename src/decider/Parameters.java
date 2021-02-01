@@ -1,3 +1,5 @@
+package decider;
+
 public class Parameters {
     public double LENGTH1;
     public double LENGTH2;
@@ -20,14 +22,14 @@ public class Parameters {
     public int G_PTS;
 
     public Parameters(
-        double LENGTH1, 
-        double LENGTH2, 
-        double RADIUS1, 
-        double RADIUS2, 
-        double EPSILON, 
-        double AREA1, 
-        double AREA2, 
-        double DIST, 
+        double LENGTH1,
+        double LENGTH2,
+        double RADIUS1,
+        double RADIUS2,
+        double EPSILON,
+        double AREA1,
+        double AREA2,
+        double DIST,
         int QUADS,
         int Q_PTS,
         int N_PTS,
@@ -41,15 +43,15 @@ public class Parameters {
         int G_PTS){
         this.LENGTH1 = LENGTH1;
         this.LENGTH2 = LENGTH2;
-        this.RADIUS1 = RADIUS1; 
-        this.RADIUS2 = RADIUS2; 
+        this.RADIUS1 = RADIUS1;
+        this.RADIUS2 = RADIUS2;
         this.EPSILON = EPSILON;
         this.AREA1 = AREA1;
         this.AREA2 = AREA2;
         this.DIST = DIST;
         this.QUADS = QUADS;
-        this.Q_PTS = Q_PTS; 
-        this.N_PTS = N_PTS; 
+        this.Q_PTS = Q_PTS;
+        this.N_PTS = N_PTS;
         this.K_PTS = K_PTS;
         this.A_PTS = A_PTS;
         this.B_PTS = B_PTS;

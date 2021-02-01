@@ -10,34 +10,49 @@ public class Conditions {
         this.params = parameters;
     }
 
-    public void licCond0() {
+    public boolean licCond0() {
+        return false;
     }
-    public void licCond1() {
+    public boolean licCond1() {
+        return false;
     }
-    public void licCond2() {
+    public boolean licCond2() {
+        return false;
     }
-    public void licCond3() {
+    public boolean licCond3() {
+        return false;
     }
-    public void licCond4() {
+    public boolean licCond4() {
+        return false;
     }
-    public void licCond5() {
+    public boolean licCond5() {
+        return false;
     }
-    public void licCond6() {
+    public boolean licCond6() {
+        return false;
     }
-    public void licCond7() {
+    public boolean licCond7() {
+        return false;
     }
-    public void licCond8() {
+    public boolean licCond8() {
+        return false;
     }
-    public void licCond9() {
+    public boolean licCond9() {
+        return false;
     }
-    public void licCond10() {
+    public boolean licCond10() {
+        return false;
     }
-    public void licCond11() {
+    public boolean licCond11() {
+        return false;
     }
-    public void licCond12() {
+    public boolean licCond12() {
+        return false;
     }
-    public void licCond13() {
+    public boolean licCond13() {
+        return false;
     }
-    public void licCond14() {
+    public boolean licCond14() {
+        return false;
     }
 }
