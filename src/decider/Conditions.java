@@ -38,6 +38,7 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond1() {
         return false;
     }
@@ -105,6 +106,7 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond4() {
         int count, x, y, curQuadrant, quadCount;
         int[] point;
@@ -157,7 +159,12 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond5() {
+        for(int i=1; i<this.points.length; i++) {
+            if(this.points[i][0] - this.points[i-1][0] < 0)
+                return true;
+        }
         return false;
     }
     public boolean licCond6() {
