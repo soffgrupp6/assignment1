@@ -86,14 +86,58 @@ public class TestConditions {
         assertTrue("Condition 0 is not true", cond.licCond0());
     }
 
-    // Test that condition 0 yields exception when number of points < 2
-    @Test(expected = IllegalArgumentException.class)
+    // Test that condition 0 yields false when number of points < 2
+    @Test
     public void testCond0YieldsExceptionOnFewPoints() {
         int[][] points = { {12, 13} };
         Parameters params = new Parameters(20,2,3,4,1,10,11,15,3,2,2,2,2,2,2,2,2,2,2);
 
         cond = new Conditions(points, params);
-        cond.licCond0();
+        assertFalse("Condition 0 is not false", cond.licCond0());
+    }
+
+    // Test that condition 4 is true with three consecutive points in 2 different quadrants
+    @Test
+    public void testCond4isTrue3Points2Quads() {
+        int[][] points = { {-1, 0}, {0, 1}, {0, 2} };
+        Parameters params = new Parameters(20,2,3,4,1,10,11,15,2,3,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 4 is not true", cond.licCond4());
+    }
+
+    // Test that condition 4 is true with three consecutive points in 2 different quadrants, with points not in the beginning
+    @Test
+    public void testCond4isTrue3Points2QuadsNotBeginning() {
+        int[][] points = {{0, 0}, {0, 0}, {0,0}, {-1, 0}, {0, 1}, {0, 2} };
+        Parameters params = new Parameters(20,2,3,4,1,10,11,15,2,3,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 4 is not true", cond.licCond4());
+    }
+
+    // Test that condition 4 is false with three consecutive points in 3 different quadrants
+    @Test
+    public void testCond4isFalse3Points3Quads() {
+        int[][] points = { {-1, 0}, {0, 1}, {0, 2}, {0, 3} };
+        Parameters params = new Parameters(20,2,3,4,1,10,11,15,3,3,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 4 is not false", cond.licCond4());
+    }
+
+    // Test that condition 4 is true with three consecutive points in 3 different quadrants in the middle of many points
+    @Test
+    public void testCond4isTrue3Points3QuadsMiddle() {
+        int[][] points = { {0, 0}, {0, 1}, {0, 1}, {-1, 0}, {-1, -1}, {0,3}, {0,4}, {2,3} };
+        Parameters params = new Parameters(20,2,3,4,1,10,11,15,3,3,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 4 is not true", cond.licCond4());
     }
 
     // Test that condition 3 is false when AREA1 = 9, triangle area = 8
