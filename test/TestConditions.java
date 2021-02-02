@@ -378,7 +378,8 @@ public class TestConditions {
         cond = new Conditions(points, params);
 
         assertFalse("Condition 14 is not false for multiple triangles", cond.licCond14());
-  
+    }
+    
     // Test that condition 7 is true for simple case
     @Test
     public void testCond7isTrueSimpleCase() {
