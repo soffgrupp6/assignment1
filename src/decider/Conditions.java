@@ -21,7 +21,7 @@ public class Conditions {
         float xDis, yDis;
 
         if(points.length < 2)
-            throw new IllegalArgumentException("Need to be at least two points");
+            return false;
 
         /**
          * Iterate each point and check the distance between two consecutive points
@@ -42,12 +42,119 @@ public class Conditions {
         return false;
     }
     public boolean licCond2() {
+        int[][] c = {{0,0}, {0,0}, {0,0}}; // Three consecutive points
+        double disC0C1, disC1C2, disC0C2, cosC1, angle;
+
+        if(points.length < 3)
+            return false;
+
+        for(int i = 0; i <= points.length - 3; i++) {
+             /* Add points */
+            c[0] = points[i];
+            c[1] = points[i + 1];
+            c[2] = points[i + 2];
+
+            /* Make sure points does not coincide */
+            if(c[0][0] == c[1][0] && c[0][1] == c[1][1])
+                continue;
+            if(c[2][0] == c[1][0] && c[2][1] == c[1][1])
+                continue;
+
+            /* Calculate the distances between the three points */
+            disC0C1 = Math.sqrt(Math.pow(c[0][0] - c[1][0], 2) + Math.pow(c[0][1] - c[1][1], 2));
+            disC1C2 = Math.sqrt(Math.pow(c[1][0] - c[2][0], 2) + Math.pow(c[1][1] - c[2][1], 2));
+            disC0C2 = Math.sqrt(Math.pow(c[0][0] - c[2][0], 2) + Math.pow(c[0][1] - c[2][1], 2));
+
+            /* Here we use the cosine formula to calculate the cosine of the vertex of c1 */
+            cosC1 = (Math.pow(disC0C2, 2) - Math.pow(disC1C2, 2) - Math.pow(disC0C1, 2)) / (-1 * disC1C2 * disC0C1);
+
+            /* Now we take the arccos to get the angle */
+            angle = Math.acos(cosC1);
+
+            if(angle < (Math.PI - params.EPSILON) || angle > (Math.PI + params.EPSILON))
+                return true;
+        }
         return false;
     }
+
     public boolean licCond3() {
+        int[][] c = { {0, 0}, {0, 0}, {0, 0} };
+        double disC0C1, disC1C2, disC0C2, area, s;
+
+        if(points.length < 3)
+            return false;
+            
+        for(int i = 0; i <= points.length - 3; i++) {
+             /* Add points */
+            c[0] = points[i];
+            c[1] = points[i + 1];
+            c[2] = points[i + 2];
+
+            /* Calculate the distances between the three points */
+            disC0C1 = Math.sqrt(Math.pow(c[0][0] - c[1][0], 2) + Math.pow(c[0][1] - c[1][1], 2));
+            disC1C2 = Math.sqrt(Math.pow(c[1][0] - c[2][0], 2) + Math.pow(c[1][1] - c[2][1], 2));
+            disC0C2 = Math.sqrt(Math.pow(c[0][0] - c[2][0], 2) + Math.pow(c[0][1] - c[2][1], 2));
+
+            /* Here we use Herons formula to calculate the area */
+            s = (disC0C1 + disC1C2 + disC0C2) / 2;
+            area = Math.sqrt(s * (s - disC0C1) * (s - disC1C2) * (s - disC0C2));
+
+            if(area > params.AREA1)
+                return true;
+        }
+
         return false;
     }
     public boolean licCond4() {
+        int count, x, y, curQuadrant, quadCount;
+        int[] point;
+
+        boolean[] quandrantsUsed = {false, false, false, false};
+
+        count = 0;
+        quadCount = 0;
+        curQuadrant = 0;
+
+        for(int i = 0; i < points.length; i++) {
+            point = points[i];
+            x = point[0];
+            y = point[1];
+
+            // 1st quadrant
+            if(x >= 0 && y >= 0)
+                curQuadrant = 0;
+
+            // 2st quadrant
+            else if(x < 0 && y >= 0)
+                curQuadrant = 1;
+
+            // 3st quadrant
+            else if(x <= 0 && y < 0)
+                curQuadrant = 2;
+
+            // 4st quadrant
+            else if(x >= 0 && y <= 0)
+                curQuadrant = 3;
+
+            /* We mark the quandrat as used, and add 1 to the total number of quandrants if this is a new quadrant */
+            if(! quandrantsUsed[curQuadrant]) {
+                quadCount++;
+                quandrantsUsed[curQuadrant] = true;
+            }
+
+            count++;
+
+            if(quadCount >= params.QUADS && count >= params.Q_PTS)
+                return true;
+            
+            /* This means we need to start looking for a new consecutive pattern */
+            if(quadCount < params.QUADS && count >= params.Q_PTS) {
+                quandrantsUsed = new boolean[4];
+                count = 0;
+                quadCount = 0;
+            }
+        }
+
         return false;
     }
     public boolean licCond5() {
@@ -112,6 +219,21 @@ public class Conditions {
         return false;
     }
     public boolean licCond10() {
+        if(points.length < 5)
+            return false;
+
+        int[] a,b,c;
+        float area;
+
+        for(int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            a = points[i];
+            b = points[params.E_PTS + 1 + i];
+            c = points[params.E_PTS + params.F_PTS + 2 + i];
+            area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2);
+            if(area > params.AREA1)
+                return true;
+        }
+
         return false;
     }
     public boolean licCond11() {
