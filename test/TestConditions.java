@@ -474,7 +474,7 @@ public class TestConditions {
 
         assertTrue("Condition 8 is not true", cond.licCond8());
     }
-  
+      
     // Test that condition 10 is false
     @Test
     public void testCond10isFalse() {
@@ -482,7 +482,6 @@ public class TestConditions {
         Parameters params = new Parameters(0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,2,2,0);
 
         cond = new Conditions(points, params);
-
         assertFalse("Condition 10 is not false", cond.licCond10());
     }
 
@@ -493,8 +492,27 @@ public class TestConditions {
         Parameters params = new Parameters(0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,2,2,0);
 
         cond = new Conditions(points, params);
-
         assertTrue("Condition 10 is not true", cond.licCond10());
+    }
+
+    // Test that condition 11 is true
+    @Test
+    public void testCond11isTrue() {
+        int[][] points = { {1, 0}, {100, -60}, {0, 0} };
+        Parameters params = new Parameters(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1);
+
+        cond = new Conditions(points, params);
+        assertTrue("Condition 11 is not true", cond.licCond11());
+    }
+
+    // Test that condition 11 is false
+    @Test
+    public void testCond11isFalse() {
+        int[][] points = { {0, 0}, {100, -60}, {1, 0} };
+        Parameters params = new Parameters(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1);
+
+        cond = new Conditions(points, params);
+        assertFalse("Condition 11 is not false", cond.licCond11());
     }
 
 }
