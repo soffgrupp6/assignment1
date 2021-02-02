@@ -167,13 +167,41 @@ public class Conditions {
         return false;
     }
     public boolean licCond8() {
-        if (points.length < 5)
+
+        if(points.length < 5)
            return false;
 
+        double distA, distB, distC;
+        int j, k;
+        int cx, cy;
 
+        // For each three points i, j and k
+        for(int i = 0; i < points.length - (params.A_PTS + params.B_PTS) - 2; i++) {
 
+            // A_PTS intervening points
+            j = i + params.A_PTS + 1;
+            k = j + params.B_PTS + 1;
+
+            // Radius of points
+            // Calculate the centeroid of the triangle formed by the three points
+            cx = (points[i][0] + points[j][0] + points[k][0]) / 3;
+            cy = (points[i][1] + points[j][1] + points[k][1]) / 3;
+
+            // Find largest distance from the centeroid to use as radius
+            distA = Math.sqrt(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2));
+            distB = Math.sqrt(Math.pow(points[j][0] - cx, 2) - Math.pow(points[j][1] - cy, 2));
+            distC = Math.sqrt(Math.pow(points[k][0] - cx, 2) - Math.pow(points[k][1] - cy, 2));
+
+            double distD = Math.max(distA, distB);
+            double radius = Math.max(distC, distD);
+
+            // Compare radius to given radius
+            if (radius >= params.RADIUS1)
+                return true;
+        }
         return false;
     }
+
     public boolean licCond9() {
         return false;
     }
