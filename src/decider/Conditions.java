@@ -21,7 +21,7 @@ public class Conditions {
         float xDis, yDis;
 
         if(points.length < 2)
-            throw new IllegalArgumentException("Need to be at least two points");
+            return false;
 
         /**
          * Iterate each point and check the distance between two consecutive points
@@ -48,6 +48,55 @@ public class Conditions {
         return false;
     }
     public boolean licCond4() {
+        int count, x, y, curQuadrant, quadCount;
+        int[] point;
+
+        boolean[] quandrantsUsed = {false, false, false, false};
+
+        count = 0;
+        quadCount = 0;
+        curQuadrant = 0;
+
+        for(int i = 0; i < points.length; i++) {
+            point = points[i];
+            x = point[0];
+            y = point[1];
+
+            // 1st quadrant
+            if(x >= 0 && y >= 0)
+                curQuadrant = 0;
+
+            // 2st quadrant
+            else if(x < 0 && y >= 0)
+                curQuadrant = 1;
+
+            // 3st quadrant
+            else if(x <= 0 && y < 0)
+                curQuadrant = 2;
+
+            // 4st quadrant
+            else if(x >= 0 && y <= 0)
+                curQuadrant = 3;
+
+            /* We mark the quandrat as used, and add 1 to the total number of quandrants if this is a new quadrant */
+            if(! quandrantsUsed[curQuadrant]) {
+                quadCount++;
+                quandrantsUsed[curQuadrant] = true;
+            }
+
+            count++;
+
+            if(quadCount >= params.QUADS && count >= params.Q_PTS)
+                return true;
+            
+            /* This means we need to start looking for a new consecutive pattern */
+            if(quadCount < params.QUADS && count >= params.Q_PTS) {
+                quandrantsUsed = new boolean[4];
+                count = 0;
+                quadCount = 0;
+            }
+        }
+
         return false;
     }
     public boolean licCond5() {
