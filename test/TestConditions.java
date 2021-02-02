@@ -25,6 +25,26 @@ public class TestConditions {
         assertFalse("Condition 0 is not false", cond.licCond0());
     }
 
+    // Test that condition 1 is true
+    @Test
+    public void testCond1isTrue() {
+        int[][] points = { {1, 2}, {31, 213}, {-7, 1}, {-3, 3} };
+        Parameters params = new Parameters(0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 1 is not true", cond.licCond1());
+    }
+
+    // Test that condition 1 is false
+    @Test
+    public void testCond1isFalse() {
+        int[][] points = { {1, 2}, {2, -1}, {3, 1}, {-1, 3} };
+        Parameters params = new Parameters(0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 1 is not false", cond.licCond1());
+    }
+
     // Test that condition 2 is false when coinciding
     @Test
     public void testCond2isFalse() {
@@ -282,8 +302,52 @@ public class TestConditions {
 
         assertFalse("Condition 3 is not false", cond.licCond3());
     }
+  
+    // Test that condition 7 is true for simple case
+    @Test
+    public void testCond7isTrueSimpleCase() {
+        int[][] points = { {0, 0}, {0, 0}, {5, 5} };
+        Parameters params = new Parameters(7,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0);
 
-       // Test that condition 5 is false
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 7 is not true for simple case", cond.licCond7());
+    }
+
+    // Test that condition 7 is false for simple case
+    @Test
+    public void testCond7isFalseSimpleCase() {
+        int[][] points = { {0, 0}, {0, 0}, {5, 5} };
+        Parameters params = new Parameters(8,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 7 is not false for simple case", cond.licCond7());
+    }
+
+    // Test that condition 7 is true for complex case
+    @Test
+    public void testCond7isTrueComplexCase() {
+        int[][] points = { {0, 0}, {-1, 4}, {5, 5}, {6, 6}, {7, 7}, {-9, 13} };
+        Parameters params = new Parameters(12,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0);
+
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 7 is not true for complex case", cond.licCond7());
+    }
+
+    // Test that condition 7 is false for NUMPOINTS < 3
+    @Test
+    public void testCond7isFalseTwoPoints() {
+        int[][] points = { {0, 0}, {-1, 4} };
+        Parameters params = new Parameters(12,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 7 is not false for two points", cond.licCond7());
+    }
+
+    // Test that condition 5 is false
     @Test
     public void testCond5isFalse() {
         int[][] points = { {12, 13}, {13, 213}, {14, 1}, {15, 3} };
@@ -342,7 +406,7 @@ public class TestConditions {
         Parameters params = new Parameters(0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,2,2,0);
 
         cond = new Conditions(points, params);
-        
+
         assertFalse("Condition 10 is not false", cond.licCond10());
     }
 
@@ -353,7 +417,7 @@ public class TestConditions {
         Parameters params = new Parameters(0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,2,2,0);
 
         cond = new Conditions(points, params);
-        
+
         assertTrue("Condition 10 is not true", cond.licCond10());
     }
 
