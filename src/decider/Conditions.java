@@ -76,7 +76,33 @@ public class Conditions {
         }
         return false;
     }
+
     public boolean licCond3() {
+        int[][] c = { {0, 0}, {0, 0}, {0, 0} };
+        double disC0C1, disC1C2, disC0C2, area, s;
+
+        if(points.length < 3)
+            return false;
+            
+        for(int i = 0; i <= points.length - 3; i++) {
+             /* Add points */
+            c[0] = points[i];
+            c[1] = points[i + 1];
+            c[2] = points[i + 2];
+
+            /* Calculate the distances between the three points */
+            disC0C1 = Math.sqrt(Math.pow(c[0][0] - c[1][0], 2) + Math.pow(c[0][1] - c[1][1], 2));
+            disC1C2 = Math.sqrt(Math.pow(c[1][0] - c[2][0], 2) + Math.pow(c[1][1] - c[2][1], 2));
+            disC0C2 = Math.sqrt(Math.pow(c[0][0] - c[2][0], 2) + Math.pow(c[0][1] - c[2][1], 2));
+
+            /* Here we use Herons formula to calculate the area */
+            s = (disC0C1 + disC1C2 + disC0C2) / 2;
+            area = Math.sqrt(s * (s - disC0C1) * (s - disC1C2) * (s - disC0C2));
+
+            if(area > params.AREA1)
+                return true;
+        }
+
         return false;
     }
     public boolean licCond4() {
