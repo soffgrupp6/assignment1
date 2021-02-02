@@ -308,11 +308,11 @@ public class TestConditions {
    // Test that condition 8 is false when points out of radius
     @Test
     public void testCond8isFalse() {
-        int[][] points = { {1, 13}, {2, 213}, {3, 1}, {4, 3}, {5, 3} };
-        Parameters params = new Parameters(0,0,2,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0);
+        int[][] points = { {1, 2}, {2, 3}, {3, 1}, {4, 3}, {5, 3} };
+        Parameters params = new Parameters(0,0,10,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0);
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 0 is not false", cond.licCond8());
+        assertFalse("Condition 8 is not false", cond.licCond8());
     }
 
     // Test that condition 8 is false when too few points
@@ -322,7 +322,7 @@ public class TestConditions {
         Parameters params = new Parameters(0,0,2,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0);
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 0 is not false", cond.licCond8());
+        assertFalse("Condition 8 is not false", cond.licCond8());
     }
 
     // Test that condition 8 is true
@@ -332,7 +332,7 @@ public class TestConditions {
         Parameters params = new Parameters(0,0,10,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0);
         cond = new Conditions(points, params);
 
-        assertTrue("Condition 0 is not true", cond.licCond8());
+        assertTrue("Condition 8 is not true", cond.licCond8());
     }
   
     // Test that condition 10 is false

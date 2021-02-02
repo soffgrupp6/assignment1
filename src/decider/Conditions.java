@@ -241,9 +241,9 @@ public class Conditions {
             cy = (points[i][1] + points[j][1] + points[k][1]) / 3;
 
             // Find largest distance from the centeroid to use as radius
-            distA = Math.sqrt(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2));
-            distB = Math.sqrt(Math.pow(points[j][0] - cx, 2) - Math.pow(points[j][1] - cy, 2));
-            distC = Math.sqrt(Math.pow(points[k][0] - cx, 2) - Math.pow(points[k][1] - cy, 2));
+            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2)));
+            distB = Math.sqrt(Math.abs(Math.pow(points[j][0] - cx, 2) - Math.pow(points[j][1] - cy, 2)));
+            distC = Math.sqrt(Math.abs(Math.pow(points[k][0] - cx, 2) - Math.pow(points[k][1] - cy, 2)));
 
             double distD = Math.max(distA, distB);
             double radius = Math.max(distC, distD);
