@@ -48,8 +48,43 @@ public class Decider {
         CMV[14] = cond.licCond14();
     }
 
+    /**
+     * Compute the PUM
+     */
     private void computePUM() {
+        int operator;
+
+        operator = 0;
+
+        /* Iterate the permutations of CMV and apply the operator to form PUM */
+        for(int i = 0; i < CMV.length; i++) {
+            for(int j = 0; j < CMV.length; j++) {
+                operator = LCM[i, j];
+                
+                // Determine which operation to use
+                switch(operator) {
+                
+                // ANDD
+                case 0:
+                    PUM[i, j] = CMV[i] && CMV[j];
+                    break;
+
+                // ORR
+                case 1:
+                    PUM[i, j] = CMV[i] || CMV[j];
+                    break;
+
+                // NOTUSED
+                case 2:
+                    PUM[i, j] = true;
+                    break;
+
+                }
+            }
+        }
+
     }
+
     private void computeFUV() {
     }
 
