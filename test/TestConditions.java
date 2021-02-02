@@ -101,7 +101,7 @@ public class TestConditions {
         assertTrue("Condition 3 is not true", cond.licCond3());
     }
 
-    // Test that condition 3 is false when there are less than 2 points
+    // Test that condition 3 is false when there are less than 3 points
     @Test
     public void testCond3isFalseWhenLessThan3Points() {
         int[][] points = {{4, 0}, {0, 0}};
