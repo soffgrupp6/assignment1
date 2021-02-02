@@ -83,7 +83,7 @@ public class Conditions {
 
         if(points.length < 3)
             return false;
-            
+
         for(int i = 0; i <= points.length - 3; i++) {
              /* Add points */
             c[0] = points[i];
@@ -146,7 +146,7 @@ public class Conditions {
 
             if(quadCount >= params.QUADS && count >= params.Q_PTS)
                 return true;
-            
+
             /* This means we need to start looking for a new consecutive pattern */
             if(quadCount < params.QUADS && count >= params.Q_PTS) {
                 quandrantsUsed = new boolean[4];
@@ -164,6 +164,25 @@ public class Conditions {
         return false;
     }
     public boolean licCond7() {
+        if (points.length < 3)
+           return false;
+
+        float xDis, yDis;
+        int j;
+
+        // For each pair i and j
+        for (int i = 0; i < points.length - params.K_PTS - 1; i++) {
+
+            // K_PTS intervening points
+            j = i + params.K_PTS + 1;
+
+            xDis = points[i][0] - points[j][0];
+            yDis = points[i][1] - points[j][1];
+
+            // Distance between point i and j greater than LENGTH1
+            if(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) > params.LENGTH1)
+                return true;
+        }
         return false;
     }
     public boolean licCond8() {
