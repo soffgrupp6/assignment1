@@ -45,4 +45,70 @@ public class TestConditions {
         cond = new Conditions(points, params);
         cond.licCond0();
     }
+
+    // Test that condition 3 is false when AREA1 = 9, triangle area = 8
+    @Test
+    public void testCond3isFalse() {
+        int[][] points = { {0, 4}, {4, 0}, {0, 0} };
+        Parameters params = new Parameters(300,2,3,4,1,9,11,15,3,2,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 3 is not false", cond.licCond3());
+    }
+
+    // Test that condition 3 is false when AREA1 = 9, triangle area = 8 in different order
+    @Test
+    public void testCond3isFalseInDifferentOrder() {
+        int[][] points = {{4, 0}, {0, 0}, {0, 4} };
+        Parameters params = new Parameters(300,2,3,4,1,9,11,15,3,2,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 3 is not false", cond.licCond3());
+    }
+
+    // Test that condition 3 is false when AREA1 = 9, triangle area = 8 with multiple triangles
+    @Test
+    public void testCond3isFalseMultipleTriangles() {
+        int[][] points = {{4, 0}, {0, 0}, {0, 4}, {3,0}, {0, 0}, {0,3} };
+        Parameters params = new Parameters(300,2,3,4,1,9,11,15,3,2,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 3 is not false", cond.licCond3());
+    }
+
+    // Test that condition 3 is true when AREA1 = 5, triangle area = 8
+    @Test
+    public void testCond3isTrue() {
+        int[][] points = {{4, 0}, {0, 0}, {0, 4}, {3,0}, {0, 0}, {0,3} };
+        Parameters params = new Parameters(300,2,3,4,1,5,11,15,3,2,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 3 is not true", cond.licCond3());
+    }
+
+    // Test that condition 3 is true when AREA1 = 7, triangle area = 8 and = 4.5 with multiple triangles
+    @Test
+    public void testCond3isTrueMultipleTriangles() {
+        int[][] points = {{4, 0}, {0, 0}, {0, 4}, {3,0}, {0, 0}, {0,3} };
+        Parameters params = new Parameters(300,2,3,4,1,7,11,15,3,2,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 3 is not true", cond.licCond3());
+    }
+
+    // Test that condition 3 is false when there are less than 2 points
+    @Test
+    public void testCond3isFalseWhenLessThan3Points() {
+        int[][] points = {{4, 0}, {0, 0}};
+        Parameters params = new Parameters(300,2,3,4,1,7,11,15,3,2,2,2,2,2,2,2,2,2,2);
+
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 3 is not false", cond.licCond3());
+    }
 }
