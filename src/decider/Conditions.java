@@ -251,6 +251,7 @@ public class Conditions {
         int[] a,b,c;
         float area;
 
+        // a, b, c are different points which form a triangle with area area 
         for(int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
             a = points[i];
             b = points[params.E_PTS + 1 + i];
@@ -263,6 +264,19 @@ public class Conditions {
         return false;
     }
     public boolean licCond11() {
+        if(points.length < 3)
+            return false;
+        
+        int[] a,b;
+
+        // a and b are two points separated by G_PTS
+        for(int i = 0; i < points.length - params.G_PTS - 1; i++){
+            a = points[i];
+            b = points[params.G_PTS + 1 + i];
+            if(b[0] - a[0] < 0)
+                return true;
+        }
+
         return false;
     }
     public boolean licCond12() {
