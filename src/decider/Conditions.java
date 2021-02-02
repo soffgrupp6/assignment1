@@ -83,7 +83,7 @@ public class Conditions {
 
         if(points.length < 3)
             return false;
-            
+
         for(int i = 0; i <= points.length - 3; i++) {
              /* Add points */
             c[0] = points[i];
@@ -146,7 +146,7 @@ public class Conditions {
 
             if(quadCount >= params.QUADS && count >= params.Q_PTS)
                 return true;
-            
+
             /* This means we need to start looking for a new consecutive pattern */
             if(quadCount < params.QUADS && count >= params.Q_PTS) {
                 quandrantsUsed = new boolean[4];
@@ -184,7 +184,35 @@ public class Conditions {
     public boolean licCond13() {
         return false;
     }
+
     public boolean licCond14() {
+        if (points.length < 5)
+            return false;
+
+        int[] a,b,c;
+        double area;
+
+        boolean triangleAreaLargerThanAREA1 = false;
+        boolean triangleAreaSmallerThanAREA2 = false;
+
+        // For each triplet of points a, b, c
+        for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            a = points[i];
+            b = points[params.E_PTS + 1 + i];
+            c = points[params.E_PTS + params.F_PTS + 2 + i];
+
+            // Calculate area of the triangle
+            area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2.0);
+
+            if (area > params.AREA1)
+                triangleAreaLargerThanAREA1 = true;
+            if (area < params.AREA2)
+                triangleAreaSmallerThanAREA2 = true;
+        }
+
+        if (triangleAreaLargerThanAREA1 && triangleAreaSmallerThanAREA2)
+            return true;
+
         return false;
     }
 }
