@@ -40,8 +40,32 @@ public class Conditions {
     }
 
     public boolean licCond1() {
+        double distA, distB, distC;
+        int cx, cy;
+
+        if(points.length <3)
+            return false;
+
+        for (int i = 0; i < this.points.length - 2; i++) {
+            // calculate the centeroid of the triangle formed by the three points
+            cx = (points[i][0] + points[i+1][0] + points[i+2][0]) / 3;
+            cy = (points[i][1] + points[i+1][1] + points[i+2][1]) / 3;
+
+            // finds the largest distance from the centeroid to use as radius
+            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2)));
+            distB = Math.sqrt(Math.abs(Math.pow(points[i+1][0] - cx, 2) - Math.pow(points[i+1][1] - cy, 2)));
+            distC = Math.sqrt(Math.abs(Math.pow(points[i+2][0] - cx, 2) - Math.pow(points[i+2][1] - cy, 2)));
+
+            double distD = Math.max(distA, distB);
+            double radius = Math.max(distC, distD);
+
+            // Compares the radius to the given radius
+            if (radius >= params.RADIUS1)
+                return true;
+        }
         return false;
     }
+
     public boolean licCond2() {
         int[][] c = {{0,0}, {0,0}, {0,0}}; // Three consecutive points
         double disC0C1, disC1C2, disC0C2, cosC1, angle;
@@ -239,8 +263,41 @@ public class Conditions {
         return false;
     }
     public boolean licCond8() {
+
+        if(points.length < 5)
+           return false;
+
+        double distA, distB, distC;
+        int j, k;
+        int cx, cy;
+
+        // For each three points i, j and k
+        for(int i = 0; i < points.length - (params.A_PTS + params.B_PTS) - 2; i++) {
+
+            // A_PTS intervening points
+            j = i + params.A_PTS + 1;
+            k = j + params.B_PTS + 1;
+
+            // Radius of points
+            // Calculate the centeroid of the triangle formed by the three points
+            cx = (points[i][0] + points[j][0] + points[k][0]) / 3;
+            cy = (points[i][1] + points[j][1] + points[k][1]) / 3;
+
+            // Find largest distance from the centeroid to use as radius
+            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2)));
+            distB = Math.sqrt(Math.abs(Math.pow(points[j][0] - cx, 2) - Math.pow(points[j][1] - cy, 2)));
+            distC = Math.sqrt(Math.abs(Math.pow(points[k][0] - cx, 2) - Math.pow(points[k][1] - cy, 2)));
+
+            double distD = Math.max(distA, distB);
+            double radius = Math.max(distC, distD);
+
+            // Compare radius to given radius
+            if (radius >= params.RADIUS1)
+                return true;
+        }
         return false;
     }
+
     public boolean licCond9() {
         return false;
     }
@@ -285,7 +342,35 @@ public class Conditions {
     public boolean licCond13() {
         return false;
     }
+
     public boolean licCond14() {
+        if (points.length < 5)
+            return false;
+
+        int[] a,b,c;
+        double area;
+
+        boolean triangleAreaLargerThanAREA1 = false;
+        boolean triangleAreaSmallerThanAREA2 = false;
+
+        // For each triplet of points a, b, c
+        for (int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            a = points[i];
+            b = points[params.E_PTS + 1 + i];
+            c = points[params.E_PTS + params.F_PTS + 2 + i];
+
+            // Calculate area of the triangle
+            area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2.0);
+
+            if (area > params.AREA1)
+                triangleAreaLargerThanAREA1 = true;
+            if (area < params.AREA2)
+                triangleAreaSmallerThanAREA2 = true;
+        }
+
+        if (triangleAreaLargerThanAREA1 && triangleAreaSmallerThanAREA2)
+            return true;
+
         return false;
     }
 }
