@@ -38,9 +38,34 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond1() {
+        double distA, distB, distC;
+        int cx, cy;
+
+        if(points.length <3)
+            return false;
+
+        for (int i = 0; i < this.points.length - 2; i++) {
+            // calculate the centeroid of the triangle formed by the three points
+            cx = (points[i][0] + points[i+1][0] + points[i+2][0]) / 3;
+            cy = (points[i][1] + points[i+1][1] + points[i+2][1]) / 3;
+
+            // finds the largest distance from the centeroid to use as radius
+            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2)));
+            distB = Math.sqrt(Math.abs(Math.pow(points[i+1][0] - cx, 2) - Math.pow(points[i+1][1] - cy, 2)));
+            distC = Math.sqrt(Math.abs(Math.pow(points[i+2][0] - cx, 2) - Math.pow(points[i+2][1] - cy, 2)));
+
+            double distD = Math.max(distA, distB);
+            double radius = Math.max(distC, distD);
+
+            // Compares the radius to the given radius
+            if (radius >= params.RADIUS1)
+                return true;
+        }
         return false;
     }
+
     public boolean licCond2() {
         int[][] c = {{0,0}, {0,0}, {0,0}}; // Three consecutive points
         double disC0C1, disC1C2, disC0C2, cosC1, angle;
@@ -105,6 +130,7 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond4() {
         int count, x, y, curQuadrant, quadCount;
         int[] point;
@@ -157,22 +183,140 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond5() {
+        for(int i=1; i<this.points.length; i++) {
+            if(this.points[i][0] - this.points[i-1][0] < 0)
+                return true;
+        }
         return false;
     }
     public boolean licCond6() {
+
+        if(points.length < 3)
+           return false;
+
+        int[] first;
+        int[] last;
+
+        double xDis, yDis;
+
+        // Do this for all cases of K_PTS consecutive points
+        for (int i = 0; i <= points.length - params.K_PTS; i++) {
+            first = points[i];
+            last = points[i + params.K_PTS - 1];
+
+            // If the first and last point coincide
+            if (first[0] == last[0] && first[1] == last[1]) {
+                boolean hasDistanceSmallerThanDist = false;
+                for (int j = i+1; j < (i + params.K_PTS - 1); j++) {
+                    // Calculate distance between points
+                    xDis = points[j][0] - first[0];
+                    yDis = points[j][1] - first[1];
+                    if (Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) <= params.DIST) {
+                        hasDistanceSmallerThanDist = true;
+                    }
+                }
+                if (!hasDistanceSmallerThanDist)
+                    return true;
+
+            } else {
+                double numerator;
+                double denominator;
+                for (int j = i+1; j < (i + params.K_PTS - 1); j++) {
+                    // Calculate distance to line defined by the first and last points
+                    // reference: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
+                    numerator = Math.abs((last[0] - first[0]) * (first[1] - points[j][1])
+                        - (first[0] - points[j][0]) * (last[1] - first[1]));
+                    xDis = last[0] - first[0];
+                    yDis = last[1] - first[1];
+                    denominator = Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2));
+
+                    if ((numerator / denominator) > params.DIST) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
     public boolean licCond7() {
+        if (points.length < 3)
+           return false;
+
+        float xDis, yDis;
+        int j;
+
+        // For each pair i and j
+        for (int i = 0; i < points.length - params.K_PTS - 1; i++) {
+
+            // K_PTS intervening points
+            j = i + params.K_PTS + 1;
+
+            xDis = points[i][0] - points[j][0];
+            yDis = points[i][1] - points[j][1];
+
+            // Distance between point i and j greater than LENGTH1
+            if(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) > params.LENGTH1)
+                return true;
+        }
         return false;
     }
     public boolean licCond8() {
+
+        if(points.length < 5)
+           return false;
+
+        double distA, distB, distC;
+        int j, k;
+        int cx, cy;
+
+        // For each three points i, j and k
+        for(int i = 0; i < points.length - (params.A_PTS + params.B_PTS) - 2; i++) {
+
+            // A_PTS intervening points
+            j = i + params.A_PTS + 1;
+            k = j + params.B_PTS + 1;
+
+            // Radius of points
+            // Calculate the centeroid of the triangle formed by the three points
+            cx = (points[i][0] + points[j][0] + points[k][0]) / 3;
+            cy = (points[i][1] + points[j][1] + points[k][1]) / 3;
+
+            // Find largest distance from the centeroid to use as radius
+            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2)));
+            distB = Math.sqrt(Math.abs(Math.pow(points[j][0] - cx, 2) - Math.pow(points[j][1] - cy, 2)));
+            distC = Math.sqrt(Math.abs(Math.pow(points[k][0] - cx, 2) - Math.pow(points[k][1] - cy, 2)));
+
+            double distD = Math.max(distA, distB);
+            double radius = Math.max(distC, distD);
+
+            // Compare radius to given radius
+            if (radius >= params.RADIUS1)
+                return true;
+        }
         return false;
     }
+
     public boolean licCond9() {
         return false;
     }
     public boolean licCond10() {
+        if(points.length < 5)
+            return false;
+
+        int[] a,b,c;
+        float area;
+
+        for(int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            a = points[i];
+            b = points[params.E_PTS + 1 + i];
+            c = points[params.E_PTS + params.F_PTS + 2 + i];
+            area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2);
+            if(area > params.AREA1)
+                return true;
+        }
+
         return false;
     }
     public boolean licCond11() {
