@@ -173,6 +173,21 @@ public class Conditions {
         return false;
     }
     public boolean licCond10() {
+        if(points.length < 5)
+            return false;
+
+        int[] a,b,c;
+        float area;
+
+        for(int i = 0; i < points.length - params.E_PTS - params.F_PTS - 2; i++) {
+            a = points[i];
+            b = points[params.E_PTS + 1 + i];
+            c = points[params.E_PTS + params.F_PTS + 2 + i];
+            area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2);
+            if(area > params.AREA1)
+                return true;
+        }
+
         return false;
     }
     public boolean licCond11() {
