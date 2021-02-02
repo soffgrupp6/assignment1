@@ -40,32 +40,8 @@ public class Conditions {
     }
 
     public boolean licCond1() {
-        double distA, distB, distC;
-        int cx, cy;
-
-        if(points.length <3)
-            return false;
-
-        for (int i = 0; i < this.points.length - 2; i++) {
-            // calculate the centeroid of the triangle formed by the three points
-            cx = (points[i][0] + points[i+1][0] + points[i+2][0]) / 3;
-            cy = (points[i][1] + points[i+1][1] + points[i+2][1]) / 3;
-
-            // finds the largest distance from the centeroid to use as radius
-            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) - Math.pow(points[i][1] - cy, 2)));
-            distB = Math.sqrt(Math.abs(Math.pow(points[i+1][0] - cx, 2) - Math.pow(points[i+1][1] - cy, 2)));
-            distC = Math.sqrt(Math.abs(Math.pow(points[i+2][0] - cx, 2) - Math.pow(points[i+2][1] - cy, 2)));
-
-            double distD = Math.max(distA, distB);
-            double radius = Math.max(distC, distD);
-
-            // Compares the radius to the given radius
-            if (radius >= params.RADIUS1)
-                return true;
-        }
         return false;
     }
-
     public boolean licCond2() {
         int[][] c = {{0,0}, {0,0}, {0,0}}; // Three consecutive points
         double disC0C1, disC1C2, disC0C2, cosC1, angle;
