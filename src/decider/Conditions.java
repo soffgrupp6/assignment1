@@ -25,7 +25,7 @@ public class Conditions {
         double disC0C1, disC1C2, disC0C2, cosC1, angle;
 
         if(points.length < 3)
-            throw new IllegalArgumentException("Invalid number of points");
+            return false;
 
         for(int i = 0; i <= points.length - 3; i++) {
              /* Add points */

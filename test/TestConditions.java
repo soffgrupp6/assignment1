@@ -60,14 +60,14 @@ public class TestConditions {
         assertFalse("Condition 2 is not true", cond.licCond2());
     }
 
-    // Test that condition 2 gives exception when number of points is < 3
-    @Test(expected = IllegalArgumentException.class)
-    public void testCond2YieldsExceptionWhenFewPoints() {
+    // Test that condition 2 returns false when number of points is < 3
+    @Test
+    public void testCond2YieldsFalseWhenFewPoints() {
         int[][] points = { {0, 1}, {0, 0}};
         Parameters params = new Parameters(1,2,3,4,2,10,11,15,3,2,2,2,2,2,2,2,2,2,2);
         cond = new Conditions(points, params);
 
-        cond.licCond2();
+        assertFalse("Condition 2 is not true", cond.licCond2());
     }
 
 }
