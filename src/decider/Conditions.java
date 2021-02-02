@@ -83,7 +83,7 @@ public class Conditions {
 
         if(points.length < 3)
             return false;
-            
+
         for(int i = 0; i <= points.length - 3; i++) {
              /* Add points */
             c[0] = points[i];
@@ -146,7 +146,7 @@ public class Conditions {
 
             if(quadCount >= params.QUADS && count >= params.Q_PTS)
                 return true;
-            
+
             /* This means we need to start looking for a new consecutive pattern */
             if(quadCount < params.QUADS && count >= params.Q_PTS) {
                 quandrantsUsed = new boolean[4];
@@ -167,6 +167,11 @@ public class Conditions {
         return false;
     }
     public boolean licCond8() {
+        if (points.length < 5)
+           return false;
+
+
+
         return false;
     }
     public boolean licCond9() {
