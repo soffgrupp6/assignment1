@@ -38,9 +38,28 @@ public class Conditions {
 
         return false;
     }
+
     public boolean licCond1() {
+        double distA, distB, distC;
+
+        for (int i = 0; i < this.points.length - 2; i++) {
+            // Calculates the radius of a circle with the three points
+            distA = Math.sqrt(Math.pow(points[i][0] - points[i + 1][0], 2) - Math.pow(points[i][1] - points[i + 1][1], 2));
+            distB = Math.sqrt(Math.pow(points[i][0] - points[i + 2][0], 2) - Math.pow(points[i][1] - points[i + 2][1], 2));
+            distC = Math.sqrt(Math.pow(points[i + 1][0] - points[i + 2][0], 2) - Math.pow(points[i + 1][1] - points[i + 2][1], 2));
+
+            double s = distA + distB + distC;
+            double area = Math.sqrt(s * (s - distA) * (s - distB) * (s - distC));
+
+            double radius = distA * distB * distC / (4 * area);
+
+            // Compares the radius to the given radius
+            if (radius >= params.RADIUS1)
+                return true;
+        }
         return false;
     }
+
     public boolean licCond2() {
         int[][] c = {{0,0}, {0,0}, {0,0}}; // Three consecutive points
         double disC0C1, disC1C2, disC0C2, cosC1, angle;
