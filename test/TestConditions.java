@@ -30,10 +30,9 @@ public class TestConditions {
     public void testCond1isTrue() {
         int[][] points = { {1, 2}, {31, 213}, {-7, 1}, {-3, 3} };
         Parameters params = new Parameters(0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 1 is not false", cond.licCond1());
+        assertTrue("Condition 1 is not true", cond.licCond1());
     }
 
     // Test that condition 1 is false
