@@ -15,6 +15,27 @@ public class Conditions {
     }
 
     public boolean licCond0() {
+        int[] prevPoint;
+        prevPoint = points[0];
+
+        float xDis, yDis;
+
+        if(points.length < 2)
+            throw new IllegalArgumentException("Need to be at least two points");
+
+        /**
+         * Iterate each point and check the distance between two consecutive points
+         */
+        for(int[] point : points) {
+            xDis = prevPoint[0] - point[0];
+            yDis = prevPoint[1] - point[1];
+
+            if(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) > params.LENGTH1)
+                return true;
+
+            prevPoint = point;
+        }
+
         return false;
     }
     public boolean licCond1() {
