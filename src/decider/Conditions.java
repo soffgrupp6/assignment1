@@ -340,7 +340,36 @@ public class Conditions {
         return false;
     }
     public boolean licCond13() {
-        return false;
+        if(points.length < 5)
+            return false;
+
+        int[] a,b,c;
+        boolean cond1 = false, cond2 = false;
+        double cx,cy, distA, distB, distC, radius;
+
+        for(int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++){
+            a = points[i];
+            b = points[params.A_PTS + 1 + i];
+            c = points[params.A_PTS + params.B_PTS + 2 + i];
+
+            // calculate center of triangle formed by points
+            cx = (a[0] + b[0] + c[0]) / 3;
+            cy = (a[1] + b[1] + c[1]) / 3;
+
+            // calculate distance from points to center of triangle
+            distA = Math.sqrt(Math.pow(a[0] - cx, 2) + Math.pow(a[1] - cy, 2));
+            distB = Math.sqrt(Math.pow(b[0] - cx, 2) + Math.pow(b[1] - cy, 2));
+            distC = Math.sqrt(Math.pow(c[0] - cx, 2) + Math.pow(c[1] - cy, 2));
+
+            radius = Math.max(Math.max(distA, distB), distC);
+
+            if(radius > params.RADIUS1)
+                cond1 = true;
+            if(radius <= params.RADIUS2)
+                cond2 = true;
+        }
+
+        return cond1 && cond2;
     }
 
     public boolean licCond14() {
