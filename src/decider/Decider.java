@@ -84,20 +84,22 @@ public class Decider {
     }
 
     private void computeFUV() {
-        outer:
         for (int i = 0; i < FUV.length; i++) {
             // If PUV is entry is false set to true
             if (!PUV[i]) {
                 FUV[i] = true;
             } else {
+                boolean hasFalse = false;
                 // Go trough the ith row in the PUM
                 for (int j = 0; j < PUM.length; j++) {
                     if (!PUM[i][j]) {
                         FUV[i] = false;
-                        continue outer;
+                        hasFalse = true;
+                        break;
                     }
                 }
-                FUV[i] = true;
+                if (!hasFalse)
+                    FUV[i] = true;
             }
         }
     }
