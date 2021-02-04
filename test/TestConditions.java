@@ -475,6 +475,26 @@ public class TestConditions {
 
         assertTrue("Condition 8 is not true", cond.licCond8());
     }
+
+    // Test that condition 9 is false when angle=pi/2 and epsilon=2
+    @Test
+    public void testCond9isFalse() {
+        int[][] points = { {1, 1}, {0, 0}, {0, 0}, {0, 0}, {-1, 1} };
+        Parameters params = new Parameters(0,0,0,0,2,0,0,0,0,0,0,0,1,1,1,1,0,0,0);
+        cond = new Conditions(points, params);
+
+        assertFalse("Condition 9 is not false", cond.licCond9());
+    }
+
+    // Test that condition 9 is true when angle=pi and epsilon = -1
+    @Test
+    public void testCond9isTrue() {
+        int[][] points = { {-1, -1}, {0, 0}, {0, 0}, {0, 0}, {1, 1} };
+        Parameters params = new Parameters(0,0,0,0,-1,0,0,0,0,0,0,0,1,1,1,1,0,0,0);
+        cond = new Conditions(points, params);
+
+        assertTrue("Condition 9 is not true", cond.licCond9());
+    }
       
     // Test that condition 10 is false
     @Test
