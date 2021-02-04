@@ -14,6 +14,11 @@ public class Conditions {
         this.params = parameters;
     }
 
+    public static double distance(int[] pointA, int[] pointB) {
+
+        return Math.sqrt(Math.pow(pointA[0] - pointB[0], 2) + Math.pow(pointA[1] - pointB[1], 2));
+    }
+
     public boolean licCond0() {
         int[] prevPoint;
         prevPoint = points[0];
@@ -41,20 +46,20 @@ public class Conditions {
 
     public boolean licCond1() {
         double distA, distB, distC;
-        int cx, cy;
+        int[] c = new int[2];
 
         if(points.length <3)
             return false;
 
         for (int i = 0; i < this.points.length - 2; i++) {
             // calculate the centeroid of the triangle formed by the three points
-            cx = (points[i][0] + points[i+1][0] + points[i+2][0]) / 3;
-            cy = (points[i][1] + points[i+1][1] + points[i+2][1]) / 3;
+            c[0] = (points[i][0] + points[i+1][0] + points[i+2][0]) / 3;
+            c[1] = (points[i][1] + points[i+1][1] + points[i+2][1]) / 3;
 
             // finds the largest distance from the centeroid to use as radius
-            distA = Math.sqrt(Math.pow(points[i][0] - cx, 2) + Math.pow(points[i][1] - cy, 2));
-            distB = Math.sqrt(Math.pow(points[i+1][0] - cx, 2) + Math.pow(points[i+1][1] - cy, 2));
-            distC = Math.sqrt(Math.pow(points[i+2][0] - cx, 2) + Math.pow(points[i+2][1] - cy, 2));
+            distA = distance(points[i], c);
+            distB = distance(points[i+1], c);
+            distC = distance(points[i+2], c);
 
             double distD = Math.max(distA, distB);
             double radius = Math.max(distC, distD);
@@ -86,9 +91,9 @@ public class Conditions {
                 continue;
 
             /* Calculate the distances between the three points */
-            disC0C1 = Math.sqrt(Math.pow(c[0][0] - c[1][0], 2) + Math.pow(c[0][1] - c[1][1], 2));
-            disC1C2 = Math.sqrt(Math.pow(c[1][0] - c[2][0], 2) + Math.pow(c[1][1] - c[2][1], 2));
-            disC0C2 = Math.sqrt(Math.pow(c[0][0] - c[2][0], 2) + Math.pow(c[0][1] - c[2][1], 2));
+            disC0C1 = distance(c[0], c[1]);
+            disC1C2 = distance(c[1], c[2]);
+            disC0C2 = distance(c[0], c[2]);
 
             /* Here we use the cosine formula to calculate the cosine of the vertex of c1 */
             cosC1 = (Math.pow(disC0C2, 2) - Math.pow(disC1C2, 2) - Math.pow(disC0C1, 2)) / (-1 * disC1C2 * disC0C1);
@@ -116,9 +121,9 @@ public class Conditions {
             c[2] = points[i + 2];
 
             /* Calculate the distances between the three points */
-            disC0C1 = Math.sqrt(Math.pow(c[0][0] - c[1][0], 2) + Math.pow(c[0][1] - c[1][1], 2));
-            disC1C2 = Math.sqrt(Math.pow(c[1][0] - c[2][0], 2) + Math.pow(c[1][1] - c[2][1], 2));
-            disC0C2 = Math.sqrt(Math.pow(c[0][0] - c[2][0], 2) + Math.pow(c[0][1] - c[2][1], 2));
+            disC0C1 = distance(c[0], c[1]);
+            disC1C2 = distance(c[1], c[2]);
+            disC0C2 = distance(c[0], c[2]);
 
             /* Here we use Herons formula to calculate the area */
             s = (disC0C1 + disC1C2 + disC0C2) / 2;
@@ -211,9 +216,7 @@ public class Conditions {
                 boolean hasDistanceSmallerThanDist = false;
                 for (int j = i+1; j < (i + params.K_PTS - 1); j++) {
                     // Calculate distance between points
-                    xDis = points[j][0] - first[0];
-                    yDis = points[j][1] - first[1];
-                    if (Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) <= params.DIST) {
+                    if (distance(points[j], first) <= params.DIST) {
                         hasDistanceSmallerThanDist = true;
                     }
                 }
@@ -253,11 +256,8 @@ public class Conditions {
             // K_PTS intervening points
             j = i + params.K_PTS + 1;
 
-            xDis = points[i][0] - points[j][0];
-            yDis = points[i][1] - points[j][1];
-
             // Distance between point i and j greater than LENGTH1
-            if(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) > params.LENGTH1)
+            if(distance(points[i], points[j]) > params.LENGTH1)
                 return true;
         }
         return false;
@@ -269,7 +269,7 @@ public class Conditions {
 
         double distA, distB, distC;
         int j, k;
-        int cx, cy;
+        int[] c = new int[2];
 
         // For each three points i, j and k
         for(int i = 0; i < points.length - (params.A_PTS + params.B_PTS) - 2; i++) {
@@ -280,13 +280,13 @@ public class Conditions {
 
             // Radius of points
             // Calculate the centeroid of the triangle formed by the three points
-            cx = (points[i][0] + points[j][0] + points[k][0]) / 3;
-            cy = (points[i][1] + points[j][1] + points[k][1]) / 3;
+            c[0] = (points[i][0] + points[j][0] + points[k][0]) / 3;
+            c[1] = (points[i][1] + points[j][1] + points[k][1]) / 3;
 
             // Find largest distance from the centeroid to use as radius
-            distA = Math.sqrt(Math.pow(points[i][0] - cx, 2) + Math.pow(points[i][1] - cy, 2));
-            distB = Math.sqrt(Math.pow(points[j][0] - cx, 2) + Math.pow(points[j][1] - cy, 2));
-            distC = Math.sqrt(Math.pow(points[k][0] - cx, 2) + Math.pow(points[k][1] - cy, 2));
+            distA = distance(points[i], c);
+            distB = distance(points[j], c);
+            distC = distance(points[i], c);
 
             double distD = Math.max(distA, distB);
             double radius = Math.max(distC, distD);
@@ -318,8 +318,8 @@ public class Conditions {
             if(points[k][0] == points[j][0] && points[k][1] == points[j][1])
                 continue;
 
-            distA = Math.sqrt(Math.pow(points[i][0] - points[j][0], 2) + Math.pow(points[i][1] - points[j][1], 2));
-            distB = Math.sqrt(Math.pow(points[j][0] - points[k][0], 2) + Math.pow(points[j][1] - points[k][1], 2));
+            distA = distance(points[i], points[j]);
+            distB = distance(points[j], points[k]);
             dot = (points[i][0] * points[k][0]) + (points[i][1] * points[k][1]);
 
             // Calculate the cosine between the two vectors
@@ -399,7 +399,8 @@ public class Conditions {
 
         int[] a,b,c;
         boolean cond1 = false, cond2 = false;
-        double cx,cy, distA, distB, distC, radius;
+        double distA, distB, distC, radius;
+        int[] center = new int[2];
 
         for(int i = 0; i < points.length - params.A_PTS - params.B_PTS - 2; i++){
             a = points[i];
@@ -407,13 +408,13 @@ public class Conditions {
             c = points[params.A_PTS + params.B_PTS + 2 + i];
 
             // calculate center of triangle formed by points
-            cx = (a[0] + b[0] + c[0]) / 3;
-            cy = (a[1] + b[1] + c[1]) / 3;
+            center[0] = (a[0] + b[0] + c[0]) / 3;
+            center[1] = (a[1] + b[1] + c[1]) / 3;
 
             // calculate distance from points to center of triangle
-            distA = Math.sqrt(Math.pow(a[0] - cx, 2) + Math.pow(a[1] - cy, 2));
-            distB = Math.sqrt(Math.pow(b[0] - cx, 2) + Math.pow(b[1] - cy, 2));
-            distC = Math.sqrt(Math.pow(c[0] - cx, 2) + Math.pow(c[1] - cy, 2));
+            distA = distance(a, center);
+            distB = distance(b, center);
+            distC = distance(c, center);
 
             radius = Math.max(Math.max(distA, distB), distC);
 
