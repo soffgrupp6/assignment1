@@ -273,11 +273,14 @@ public class Conditions {
         float xDis, yDis;
         boolean cond1 = false, cond2 = false;
 
+        // For each pair if points a and b separated by K_PTS
         for(int i = 0; i < points.length - params.K_PTS - 1; i++){
             a = points[i];
             b = points[params.K_PTS + 1 + i];
             xDis = b[0] - a[0];
             yDis = b[1] - a[1];
+            
+            // Compare the length between points with LENGTH1 and LENGTH2
             if(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) > params.LENGTH1)
                 cond1 = true;
             if(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)) < params.LENGTH2)
