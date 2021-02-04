@@ -7,7 +7,6 @@ package decider;
 public class Decider {
 
     // input variables, should be arguments in constructor
-    int numpoints; // 2 < numpoints < 100
     int[][] points;
     int[][] LCM; // 0 = ANDD, 1 = ORR, 2 = NOTUSED
     boolean[] PUV;
@@ -18,8 +17,7 @@ public class Decider {
     boolean[] FUV;
     boolean[] CMV;
 
-    public Decider() {
-        this.numpoints = numpoints;
+    public Decider(/*int[][] points, int[][] LCM, boolean[] PUV, Parameters parameters*/) {
         this.points = points;
         this.LCM = LCM;
         this.PUV = PUV;
@@ -60,10 +58,10 @@ public class Decider {
         for(int i = 0; i < CMV.length; i++) {
             for(int j = 0; j < CMV.length; j++) {
                 operator = LCM[i][j];
-                
+
                 // Determine which operation to use
                 switch(operator) {
-                
+
                 // ANDD
                 case 0:
                     PUM[i][j] = CMV[i] && CMV[j];
@@ -86,6 +84,24 @@ public class Decider {
     }
 
     private void computeFUV() {
+        for (int i = 0; i < FUV.length; i++) {
+            // If PUV is entry is false set to true
+            if (!PUV[i]) {
+                FUV[i] = true;
+            } else {
+                boolean hasFalse = false;
+                // Go trough the ith row in the PUM
+                for (int j = 0; j < PUM.length; j++) {
+                    if (!PUM[i][j]) {
+                        FUV[i] = false;
+                        hasFalse = true;
+                        break;
+                    }
+                }
+                if (!hasFalse)
+                    FUV[i] = true;
+            }
+        }
     }
 
     // calls all functions and returns the answer
