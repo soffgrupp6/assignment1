@@ -52,9 +52,9 @@ public class Conditions {
             cy = (points[i][1] + points[i+1][1] + points[i+2][1]) / 3;
 
             // finds the largest distance from the centeroid to use as radius
-            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) + Math.pow(points[i][1] - cy, 2)));
-            distB = Math.sqrt(Math.abs(Math.pow(points[i+1][0] - cx, 2) + Math.pow(points[i+1][1] - cy, 2)));
-            distC = Math.sqrt(Math.abs(Math.pow(points[i+2][0] - cx, 2) + Math.pow(points[i+2][1] - cy, 2)));
+            distA = Math.sqrt(Math.pow(points[i][0] - cx, 2) + Math.pow(points[i][1] - cy, 2));
+            distB = Math.sqrt(Math.pow(points[i+1][0] - cx, 2) + Math.pow(points[i+1][1] - cy, 2));
+            distC = Math.sqrt(Math.pow(points[i+2][0] - cx, 2) + Math.pow(points[i+2][1] - cy, 2));
 
             double distD = Math.max(distA, distB);
             double radius = Math.max(distC, distD);
@@ -284,9 +284,9 @@ public class Conditions {
             cy = (points[i][1] + points[j][1] + points[k][1]) / 3;
 
             // Find largest distance from the centeroid to use as radius
-            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - cx, 2) + Math.pow(points[i][1] - cy, 2)));
-            distB = Math.sqrt(Math.abs(Math.pow(points[j][0] - cx, 2) + Math.pow(points[j][1] - cy, 2)));
-            distC = Math.sqrt(Math.abs(Math.pow(points[k][0] - cx, 2) + Math.pow(points[k][1] - cy, 2)));
+            distA = Math.sqrt(Math.pow(points[i][0] - cx, 2) + Math.pow(points[i][1] - cy, 2));
+            distB = Math.sqrt(Math.pow(points[j][0] - cx, 2) + Math.pow(points[j][1] - cy, 2));
+            distC = Math.sqrt(Math.pow(points[k][0] - cx, 2) + Math.pow(points[k][1] - cy, 2));
 
             double distD = Math.max(distA, distB);
             double radius = Math.max(distC, distD);
@@ -318,14 +318,14 @@ public class Conditions {
             if(points[k][0] == points[j][0] && points[k][1] == points[j][1])
                 continue;
 
-            distA = Math.sqrt(Math.abs(Math.pow(points[i][0] - points[j][0], 2) + Math.pow(points[i][1] - points[j][1], 2)));
-            distB = Math.sqrt(Math.abs(Math.pow(points[j][0] - points[k][0], 2) + Math.pow(points[j][1] - points[k][1], 2)));
+            distA = Math.sqrt(Math.pow(points[i][0] - points[j][0], 2) + Math.pow(points[i][1] - points[j][1], 2));
+            distB = Math.sqrt(Math.pow(points[j][0] - points[k][0], 2) + Math.pow(points[j][1] - points[k][1], 2));
             dot = (points[i][0] * points[k][0]) + (points[i][1] * points[k][1]);
 
             // Calculate the cosine between the two vectors
             cosV = (dot)/(distA*distB);
 
-            // Take the arcCos to get the angle */
+            // Take the arcCos to get the angle
             angle = Math.acos(cosV);
 
             if(angle < (Math.PI - params.EPSILON) || angle > (Math.PI + params.EPSILON))
