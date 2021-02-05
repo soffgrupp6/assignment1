@@ -17,7 +17,7 @@ public class Decider {
     boolean[] FUV;
     boolean[] CMV;
 
-    public Decider(/*int[][] points, int[][] LCM, boolean[] PUV, Parameters parameters*/) {
+    public Decider(int[][] points, int[][] LCM, boolean[] PUV, Parameters parameters) {
         this.points = points;
         this.LCM = LCM;
         this.PUV = PUV;
@@ -25,6 +25,9 @@ public class Decider {
         this.PUM = new boolean[15][15];
         this.FUV = new boolean[15];
         this.CMV = new boolean[15];
+    }
+
+    public Decider() {
     }
 
     private void computeConds() {
@@ -105,8 +108,15 @@ public class Decider {
     }
 
     // calls all functions and returns the answer
-    public boolean Decide() {
-        return false;
+    public boolean DECIDE() {
+        computeConds();
+        computePUM();
+        computeFUV();
+        for (boolean isTrue : FUV) {
+            if (!isTrue)
+                return false;
+        }
+        return true;
     }
 
 }
