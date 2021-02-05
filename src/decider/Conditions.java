@@ -28,9 +28,8 @@ public class Conditions {
         if(points.length < 2)
             return false;
 
-        /**
-         * Iterate each point and check the distance between two consecutive points
-         */
+        
+        // Iterate each point and check the distance between two consecutive points
         for(int[] point : points) {
             xDis = prevPoint[0] - point[0];
             yDis = prevPoint[1] - point[1];
@@ -79,26 +78,26 @@ public class Conditions {
             return false;
 
         for(int i = 0; i <= points.length - 3; i++) {
-             /* Add points */
+            // Add points
             c[0] = points[i];
             c[1] = points[i + 1];
             c[2] = points[i + 2];
 
-            /* Make sure points does not coincide */
+            // Make sure points does not coincide
             if(c[0][0] == c[1][0] && c[0][1] == c[1][1])
                 continue;
             if(c[2][0] == c[1][0] && c[2][1] == c[1][1])
                 continue;
 
-            /* Calculate the distances between the three points */
+            // Calculate the distances between the three points
             disC0C1 = distance(c[0], c[1]);
             disC1C2 = distance(c[1], c[2]);
             disC0C2 = distance(c[0], c[2]);
 
-            /* Here we use the cosine formula to calculate the cosine of the vertex of c1 */
+            // Here we use the cosine formula to calculate the cosine of the vertex of c1 
             cosC1 = (Math.pow(disC0C2, 2) - Math.pow(disC1C2, 2) - Math.pow(disC0C1, 2)) / (-1 * disC1C2 * disC0C1);
 
-            /* Now we take the arccos to get the angle */
+            // Now we take the arccos to get the angle
             angle = Math.acos(cosC1);
 
             if(angle < (Math.PI - params.EPSILON) || angle > (Math.PI + params.EPSILON))
@@ -115,17 +114,17 @@ public class Conditions {
             return false;
 
         for(int i = 0; i <= points.length - 3; i++) {
-             /* Add points */
+            // Add points
             c[0] = points[i];
             c[1] = points[i + 1];
             c[2] = points[i + 2];
 
-            /* Calculate the distances between the three points */
+            // Calculate the distances between the three points
             disC0C1 = distance(c[0], c[1]);
             disC1C2 = distance(c[1], c[2]);
             disC0C2 = distance(c[0], c[2]);
 
-            /* Here we use Herons formula to calculate the area */
+            // Here we use Herons formula to calculate the area
             s = (disC0C1 + disC1C2 + disC0C2) / 2;
             area = Math.sqrt(s * (s - disC0C1) * (s - disC1C2) * (s - disC0C2));
 
@@ -167,7 +166,7 @@ public class Conditions {
             else if(x >= 0 && y <= 0)
                 curQuadrant = 3;
 
-            /* We mark the quandrat as used, and add 1 to the total number of quandrants if this is a new quadrant */
+            // We mark the quandrat as used, and add 1 to the total number of quandrants if this is a new quadrant 
             if(! quandrantsUsed[curQuadrant]) {
                 quadCount++;
                 quandrantsUsed[curQuadrant] = true;
@@ -178,7 +177,7 @@ public class Conditions {
             if(quadCount >= params.QUADS && count >= params.Q_PTS)
                 return true;
 
-            /* This means we need to start looking for a new consecutive pattern */
+            // This means we need to start looking for a new consecutive pattern 
             if(quadCount < params.QUADS && count >= params.Q_PTS) {
                 quandrantsUsed = new boolean[4];
                 count = 0;
@@ -190,8 +189,8 @@ public class Conditions {
     }
 
     public boolean licCond5() {
-        for(int i=1; i<this.points.length; i++) {
-            if(this.points[i][0] - this.points[i-1][0] < 0)
+        for(int i = 1; i < this.points.length; i++) {
+            if(this.points[i][0] - this.points[i - 1][0] < 0)
                 return true;
         }
         return false;
@@ -346,6 +345,8 @@ public class Conditions {
             a = points[i];
             b = points[params.E_PTS + 1 + i];
             c = points[params.E_PTS + params.F_PTS + 2 + i];
+
+            // calculate are of triangle formed by a, b and c
             area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2);
             if(area > params.AREA1)
                 return true;
@@ -416,6 +417,7 @@ public class Conditions {
             distB = distance(b, center);
             distC = distance(c, center);
 
+            // calculate the maximum distance from the center to a point, this is the radius
             radius = Math.max(Math.max(distA, distB), distC);
 
             if(radius > params.RADIUS1)
