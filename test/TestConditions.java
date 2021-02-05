@@ -363,7 +363,7 @@ public class TestConditions {
         assertFalse("Condition 7 is not false for two points", cond.licCond7());
     }
 
-   // Test that condition 8 is false when points out of radius
+   // Test that condition 8 is false when points in radius
     @Test
     public void testCond8isFalse() {
         int[][] points = { {1, 2}, {2, 3}, {3, 1}, {4, 3}, {5, 3} };
@@ -403,7 +403,7 @@ public class TestConditions {
         assertFalse("Condition 9 is not false", cond.licCond9());
     }
 
-    // Test that condition 9 is true when angle=pi and epsilon = -1
+    // Test that condition 9 is true when angle=pi and epsilon=-1
     @Test
     public void testCond9isTrue() {
         int[][] points = { {-1, -1}, {0, 0}, {0, 0}, {0, 0}, {1, 1} };
