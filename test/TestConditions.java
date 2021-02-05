@@ -7,7 +7,7 @@ public class TestConditions {
 
     Conditions cond;
 
-    // Test that condition 0 is false
+    // Test that condition 0 is false when the distance is smaller than 300
     @Test
     public void testCond0isFalse() {
         int[][] points = { {12, 13}, {31, 213}, {0, 1}, {-3, 3} };
@@ -18,7 +18,7 @@ public class TestConditions {
         assertFalse("Condition 0 is not false", cond.licCond0());
     }
 
-    // Test that condition 0 is true
+    // Test that condition 0 is true when distance is greater than 20
     @Test
     public void testCond0isTrue() {
         int[][] points = { {12, 13}, {31, 213}, {0, 1}, {-3, 3} };
@@ -39,7 +39,7 @@ public class TestConditions {
         assertFalse("Condition 0 is not false", cond.licCond0());
     }
 
-    // Test that condition 1 is true
+    // Test that condition 1 is true when radius = 10 and the points cannot be contained
     @Test
     public void testCond1isTrue() {
         int[][] points = { {1, 2}, {31, 213}, {-7, 1}, {-3, 3} };
@@ -49,7 +49,7 @@ public class TestConditions {
         assertTrue("Condition 1 is not true", cond.licCond1());
     }
 
-    // Test that condition 1 is false
+    // Test that condition 1 is false when radius = 10 and points can contained
     @Test
     public void testCond1isFalse() {
         int[][] points = { {1, 2}, {2, -1}, {3, 1}, {-1, 3} };
@@ -220,7 +220,7 @@ public class TestConditions {
         assertTrue("Condition 4 is not true", cond.licCond4());
     }
 
-    // Test that condition 5 is false
+    // Test that condition 5 is false when consecutive x-value is always bigger than previous x-value
     @Test
     public void testCond5isFalse() {
         int[][] points = { {12, 13}, {13, 213}, {14, 1}, {15, 3} };
@@ -231,7 +231,7 @@ public class TestConditions {
         assertFalse("Condition 5 is not false", cond.licCond5());
     }
 
-    // Test that condition 5 is true
+    // Test that condition 5 is true when the last x-value is less than the previous x-value
     @Test
     public void testCond5isTrue() {
         int[][] points = { {12, 13}, {13, 213}, {14, 1}, {10, 3} };
@@ -242,7 +242,7 @@ public class TestConditions {
         assertTrue("Condition 5 is not true", cond.licCond5());
     }
 
-    // Test that condition 6 is true for a simple case
+    // Test that condition 6 is true for N_PTS = 3 and DIST = 10
     @Test
     public void testCond6simpleTrue() {
         int[][] points = { {0, 0}, {30, 30}, {0, 15}, {-3, 3} };
@@ -250,10 +250,10 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertTrue("Condition 6 is not true for simple case", cond.licCond6());
+        assertTrue("Condition 6 is not true for N_PTS = 3 and DIST = 10", cond.licCond6());
     }
 
-    // Test that condition 6 is false for a simple case
+    // Test that condition 6 is false for N_PTS = 3 and DIST = 10
     @Test
     public void testCond6simpleFalse() {
         int[][] points = { {0, 0}, {1, 10}, {0, 15}, {-3, 3} };
@@ -261,7 +261,7 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 6 is not false for simple case", cond.licCond6());
+        assertFalse("Condition 6 is not false for N_PTS = 3 and DIST = 10", cond.licCond6());
     }
 
     // Test that condition 6 is false when distance is exactly DIST
@@ -275,7 +275,7 @@ public class TestConditions {
         assertFalse("Condition 6 is not false for distance = DIST", cond.licCond6());
     }
 
-    // Test that condition 6 is false for coinciding points
+    // Test that condition 6 is false for case with coinciding points and requirements not met
     @Test
     public void testCond6FalseForCoincidingPoints() {
         int[][] points = { {10, 10}, {0, 0}, {9, 8}, {-3, -2}, {0, 0} };
@@ -283,10 +283,10 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 6 is not false for coinciding points", cond.licCond6());
+        assertFalse("Condition 6 is not false for coinciding points with requirements not met", cond.licCond6());
     }
 
-    // Test that condition 6 is true for coinciding points
+    // Test that condition 6 is true for case with coinciding points and requirements are met
     @Test
     public void testCond6TrueForCoincidingPoints() {
         int[][] points = { {10, 10}, {0, 0}, {9, 8}, {-3, -4}, {0, 0} };
@@ -294,10 +294,10 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertTrue("Condition 6 is not true for coinciding points", cond.licCond6());
+        assertTrue("Condition 6 is not true for coinciding points with requirements met", cond.licCond6());
     }
 
-    // Test that condition 6 is true for complex case
+    // Test that condition 6 is true for many points with condition requirements met
     @Test
     public void testCond6TrueForComplexCase() {
         int[][] points = { {10, 10}, {0, 0}, {9, 8}, {-3, -4}, {0, 0}, {1, 1}, {7, 9}, {-15, -9} };
@@ -308,7 +308,7 @@ public class TestConditions {
         assertTrue("Condition 6 is not true for many points", cond.licCond6());
     }
 
-    // Test that condition 6 is false for complex case
+    // Test that condition 6 is false for many points with condition requirements not met
     @Test
     public void testCond6FalseForComplexCase() {
         int[][] points = { {10, 10}, {0, 0}, {9, 8}, {-3, -4}, {0, 0}, {1, 1}, {2, 3}, {-15, -9} };
@@ -319,7 +319,7 @@ public class TestConditions {
         assertFalse("Condition 6 is not false for many points", cond.licCond6());
     }
 
-    // Test that condition 7 is true for simple case
+    // Test that condition 7 is true for minimal case that fulfills requirements
     @Test
     public void testCond7isTrueSimpleCase() {
         int[][] points = { {0, 0}, {0, 0}, {5, 5} };
@@ -327,10 +327,10 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertTrue("Condition 7 is not true for simple case", cond.licCond7());
+        assertTrue("Condition 7 is not true for minimal correct case", cond.licCond7());
     }
 
-    // Test that condition 7 is false for simple case
+    // Test that condition 7 is false for minimal case that doesn't fulfill requirements
     @Test
     public void testCond7isFalseSimpleCase() {
         int[][] points = { {0, 0}, {0, 0}, {5, 5} };
@@ -338,7 +338,7 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 7 is not false for simple case", cond.licCond7());
+        assertFalse("Condition 7 is not false for minimal case", cond.licCond7());
     }
 
     // Test that condition 7 is true for complex case
@@ -363,19 +363,19 @@ public class TestConditions {
         assertFalse("Condition 7 is not false for two points", cond.licCond7());
     }
 
-   // Test that condition 8 is false when points out of radius
+   // Test that condition 8 is false when points in radius
     @Test
     public void testCond8isFalse() {
         int[][] points = { {1, 2}, {2, 3}, {3, 1}, {4, 3}, {5, 3} };
         Parameters params = new Parameters(0,0,10,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0);
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 8 is not false", cond.licCond8());
+        assertFalse("Condition 8 is not false when point out of radius", cond.licCond8());
     }
 
     // Test that condition 8 is false when too few points
     @Test
-    public void testCond8isFalse2() {
+    public void testCond8isFalseTwoPoints() {
         int[][] points = { {1, 13}, {2, 213}, {3, 1}, {4, 3}};
         Parameters params = new Parameters(0,0,2,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0);
         cond = new Conditions(points, params);
@@ -403,7 +403,7 @@ public class TestConditions {
         assertFalse("Condition 9 is not false", cond.licCond9());
     }
 
-    // Test that condition 9 is true when angle=pi and epsilon = -1
+    // Test that condition 9 is true when angle=pi and epsilon=-1
     @Test
     public void testCond9isTrue() {
         int[][] points = { {-1, -1}, {0, 0}, {0, 0}, {0, 0}, {1, 1} };
@@ -413,7 +413,7 @@ public class TestConditions {
         assertTrue("Condition 9 is not true", cond.licCond9());
     }
 
-    // Test that condition 10 is false
+    // Test that condition 10 is false when AREA1 is greater than the traingle area
     @Test
     public void testCond10isFalse() {
         int[][] points = { {0, 0}, {100, -60}, {0, 1}, {0, 5}, {76, 52}, {98, 99}, {2, 0} };
@@ -423,7 +423,7 @@ public class TestConditions {
         assertFalse("Condition 10 is not false", cond.licCond10());
     }
 
-    // Test that condition 10 is true
+    // Test that condition 10 is true when AREA1 is lesser than the traingle area
     @Test
     public void testCond10isTrue() {
         int[][] points = { {0, 0}, {100, -60}, {0, 1}, {0, 5}, {76, 52}, {98, 99}, {2, 0} };
@@ -433,7 +433,7 @@ public class TestConditions {
         assertTrue("Condition 10 is not true", cond.licCond10());
     }
 
-    // Test that condition 11 is true
+    // Test that condition 11 is true when X position of first point is greater than X position of third point
     @Test
     public void testCond11isTrue() {
         int[][] points = { {1, 0}, {100, -60}, {0, 0} };
@@ -443,7 +443,7 @@ public class TestConditions {
         assertTrue("Condition 11 is not true", cond.licCond11());
     }
 
-    // Test that condition 11 is false
+    // Test that condition 11 is false when X position of first point is lesser than X position of third point
     @Test
     public void testCond11isFalse() {
         int[][] points = { {0, 0}, {100, -60}, {1, 0} };
@@ -453,7 +453,7 @@ public class TestConditions {
         assertFalse("Condition 11 is not false", cond.licCond11());
     }
 
-    // Test that condition 12 is true
+    // Test that condition 12 is true when point 0 and 2 is further apart than LENGTH1 and point 1 and 3 is closer than LENGTH2
     @Test
     public void testCond12isTrue() {
         int[][] points = { {0, 0}, {2, 2}, {4, 3}, {1, 1} };
@@ -464,7 +464,7 @@ public class TestConditions {
         assertTrue("Condition 12 is not true", cond.licCond12());
     }
 
-    // Test that condition 12 is false
+    // Test that condition 12 is false when point 0 and 2 is further apart than LENGTH1 and point 1 and 3 is further than LENGTH2
     @Test
     public void testCond12isFalse() {
         int[][] points = { {0, 0}, {19, -2}, {4, 3}, {1, 1} };
@@ -475,7 +475,7 @@ public class TestConditions {
         assertFalse("Condition 12 is not false", cond.licCond12());
     }
 
-    // Test that condition 13 is true
+    // Test that condition 13 is true when three points can't be contained in RADIUS1 and three points can be contained in RADIUS2
     @Test
     public void testCond13isTrue() {
         int[][] points = { {0, 0}, {10, 10}, {10, -121}, {11, 9}, {76, 52}, {10, 8}};
@@ -486,7 +486,7 @@ public class TestConditions {
         assertTrue("Condition 13 is not true", cond.licCond13());
     }
 
-    // Test that condition 13 is false
+    // Test that condition 13 is false when three points can't be contained in RADIUS1 and three points can't be contained in RADIUS2
     @Test
     public void testCond13isFalse() {
         int[][] points = { {0, 0}, {10, 10}, {10, -121}, {11, 900}, {76, 52}, {10, 8}};
@@ -508,7 +508,7 @@ public class TestConditions {
         assertFalse("Condition 14 is not false for numpoints < 5", cond.licCond14());
     }
 
-    // Test that condition 14 is false for simple case
+    // Test that condition 14 is false for simple case that fulfills requirements
     @Test
     public void testCond14isFalse() {
         int[][] points = { {0, 0}, {2, 2}, {2, 2}, {3, 0}, {76, 52}, {98, 99}, {0, 4} };
@@ -516,10 +516,10 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertFalse("Condition 14 is not false for simple case", cond.licCond14());
+        assertFalse("Condition 14 is not false for simple case that fulfills requirements", cond.licCond14());
     }
 
-    // Test that condition 14 is true for simple case
+    // Test that condition 14 is true for simple case that fulfills requirements
     @Test
     public void testCond14isTrue() {
         int[][] points = { {0, 0}, {2, 2}, {2, 2}, {3, 0}, {76, 52}, {98, 99}, {0, 4} };
@@ -527,10 +527,10 @@ public class TestConditions {
 
         cond = new Conditions(points, params);
 
-        assertTrue("Condition 14 is not true for simple case", cond.licCond14());
+        assertTrue("Condition 14 is not true for simple case that fulfills requirements", cond.licCond14());
     }
 
-    // Test that condition 14 is false for exact area1
+    // Test that condition 14 is false for triangle with exactly area1
     @Test
     public void testCond14isFalseForExactArea1() {
         int[][] points = { {0, 0}, {2, 2}, {2, 2}, {3, 0}, {76, 52}, {98, 99}, {0, 4} };
@@ -541,7 +541,7 @@ public class TestConditions {
         assertFalse("Condition 14 is not false for triangle with exactly area1", cond.licCond14());
     }
 
-    // Test that condition 14 is false for exact area2
+    // Test that condition 14 is false for triangle with exactly area2
     @Test
     public void testCond14isFalseForExactArea2() {
         int[][] points = { {0, 0}, {2, 2}, {2, 2}, {3, 0}, {76, 52}, {98, 99}, {0, 4} };
@@ -552,7 +552,7 @@ public class TestConditions {
         assertFalse("Condition 14 is not false for triangle with exactly area2", cond.licCond14());
     }
 
-    // Test that condition 14 is true for multiple triangles
+    // Test that condition 14 is true for multiple triangles (one bigger than area1, one smaller than area2)
     @Test
     public void testCond14isTrueForMultipleTriangles() {
         int[][] points = { {0, 0}, {2, 2}, {2, 2}, {3, 0}, {76, 52}, {98, 99}, {99, 4}, {1, 3} };
@@ -573,5 +573,4 @@ public class TestConditions {
 
         assertFalse("Condition 14 is not false for multiple triangles", cond.licCond14());
     }
-
 }
