@@ -12,6 +12,10 @@ The purpose of this program is to, given a set of points and parameters together
 
 The parts of this program were split evenly and implemented mostly individually by all 4 members of the group. The basic code skeleton was decided upon and developed together. The different LIC conditions were worked on by each person who implemented at least 3 of the 15 conditions, including tests. The code was then refactored by the group together.
 
+## Remarkable
+
+As according to the requirements there were at least 18 unit tests that had to be implemented. We have implemeted a total of 58 unit tests, which is a considerable amount of testing and is sufficiently more than the 18 required. This way our tests covers a lot more of the possible states of the functions being tested, including some edge cases as well. We think that this is quite remarkable if anything.
+
 ## Testing
 
 Junit jar files (junit-4.13.1.jar, hamcrest-core-1.3.jar) are needed in the root of the repository to run automated tests. They are available [here](https://github.com/junit-team/junit4/wiki/Download-and-Install).
