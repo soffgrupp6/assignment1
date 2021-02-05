@@ -7,7 +7,7 @@ public class TestConditions {
 
     Conditions cond;
 
-    // Test that condition 0 is false
+    // Test that condition 0 is false when the distance is smaller than 300
     @Test
     public void testCond0isFalse() {
         int[][] points = { {12, 13}, {31, 213}, {0, 1}, {-3, 3} };
@@ -18,7 +18,7 @@ public class TestConditions {
         assertFalse("Condition 0 is not false", cond.licCond0());
     }
 
-    // Test that condition 0 is true
+    // Test that condition 0 is true when distance is greater than 20
     @Test
     public void testCond0isTrue() {
         int[][] points = { {12, 13}, {31, 213}, {0, 1}, {-3, 3} };
@@ -39,7 +39,7 @@ public class TestConditions {
         assertFalse("Condition 0 is not false", cond.licCond0());
     }
 
-    // Test that condition 1 is true
+    // Test that condition 1 is true when radius = 10 and the points cannot be contained
     @Test
     public void testCond1isTrue() {
         int[][] points = { {1, 2}, {31, 213}, {-7, 1}, {-3, 3} };
@@ -49,7 +49,7 @@ public class TestConditions {
         assertTrue("Condition 1 is not true", cond.licCond1());
     }
 
-    // Test that condition 1 is false
+    // Test that condition 1 is false when radius = 10 and points can contained
     @Test
     public void testCond1isFalse() {
         int[][] points = { {1, 2}, {2, -1}, {3, 1}, {-1, 3} };
@@ -220,7 +220,7 @@ public class TestConditions {
         assertTrue("Condition 4 is not true", cond.licCond4());
     }
 
-    // Test that condition 5 is false
+    // Test that condition 5 is false when consecutive x-value is always bigger than previous x-value
     @Test
     public void testCond5isFalse() {
         int[][] points = { {12, 13}, {13, 213}, {14, 1}, {15, 3} };
@@ -231,7 +231,7 @@ public class TestConditions {
         assertFalse("Condition 5 is not false", cond.licCond5());
     }
 
-    // Test that condition 5 is true
+    // Test that condition 5 is true when the last x-value is less than the previous x-value
     @Test
     public void testCond5isTrue() {
         int[][] points = { {12, 13}, {13, 213}, {14, 1}, {10, 3} };
