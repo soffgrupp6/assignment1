@@ -57,7 +57,7 @@ public class Decider {
 
         operator = 0;
 
-        /* Iterate the permutations of CMV and apply the operator to form PUM */
+        // Iterate the permutations of CMV and apply the operator to form PUM
         for(int i = 0; i < CMV.length; i++) {
             for(int j = 0; j < CMV.length; j++) {
                 operator = LCM[i][j];
@@ -118,5 +118,4 @@ public class Decider {
         }
         return true;
     }
-
 }
